@@ -1,0 +1,5 @@
+model,freshness,factuality,helpfulness,holistic,freshness_CI,factuality_CI,helpfulness_CI,holistic_CI
+pplx-7b,1080,1020,960,1000,30,40,50,55
+pplx-70b,1075,1050,990,1025,25,35,45,50
+llama2-70b,920,950,970,960,40,50,45,50
+gpt-3.5,870,960,1000,940,35,45,50,55
