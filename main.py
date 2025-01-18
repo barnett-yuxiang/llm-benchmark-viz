@@ -1,24 +1,23 @@
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 
-# 评测数据
-models = ["pplx-7b", "pplx-70b", "llama2-70b", "gpt-3.5"]
-categories = ["Freshness", "Factuality", "Helpfulness", "Holistic"]
-scores = {
-    "Freshness": [1080, 1075, 920, 870],
-    "Factuality": [1020, 1050, 950, 960],
-    "Helpfulness": [960, 990, 970, 1000],
-    "Holistic": [1000, 1025, 960, 940],
-}
+# 读取 CSV 数据
+df = pd.read_csv("data.csv")
+
+# 提取模型名称和指标
+models = df["model"].tolist()
+categories = ["freshness", "factuality", "helpfulness", "holistic"]
+errors_cols = ["freshness_CI", "factuality_CI", "helpfulness_CI", "holistic_CI"]
+
+# 构建得分和误差数据
+scores = {cat.capitalize(): df[cat].tolist() for cat in categories}
 errors = {
-    "Freshness": [30, 25, 40, 35],
-    "Factuality": [40, 35, 50, 45],
-    "Helpfulness": [50, 45, 45, 50],
-    "Holistic": [55, 50, 50, 55],
+    cat.capitalize(): df[ci_col].tolist()
+    for cat, ci_col in zip(categories, errors_cols)
 }
 
 # 颜色映射
-colors = ["#1B9E77", "#D95F02", "#7570B3", "#E7298A"]
 category_colors = {
     "Freshness": "#1B9E77",
     "Factuality": "#377EB8",
@@ -28,9 +27,9 @@ category_colors = {
 
 # 创建 2x2 子图
 fig, axes = plt.subplots(2, 2, figsize=(10, 8))
-axes = axes.flatten()  # 扁平化以便索引
+axes = axes.flatten()
 
-for i, category in enumerate(categories):
+for i, category in enumerate(scores.keys()):
     ax = axes[i]
     x = np.arange(len(models))
 
