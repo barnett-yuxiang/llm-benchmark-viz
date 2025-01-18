@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 df = pd.read_csv("data.csv")
 
 # 提取模型名称和指标
+if len(df) == 0:
+    raise ValueError("No model data found in data.csv")
 models = df["model"].tolist()
 categories = ["freshness", "factuality", "helpfulness", "holistic"]
 errors_cols = ["freshness_CI", "factuality_CI", "helpfulness_CI", "holistic_CI"]
