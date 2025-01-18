@@ -10,3 +10,9 @@ A Python-based visualization tool for benchmarking large language models (LLMs) 
 **Tech Stack:**
 - Python (matplotlib, numpy, pandas)
 - Data visualization for AI/ML model evaluation
+
+**Results:**
+
+![LLM Benchmark Results](./assets/benchmark_results.png)
+
+*Figure 1: Performance comparison of different LLM models across evaluation metrics*
